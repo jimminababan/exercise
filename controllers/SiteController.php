@@ -14,6 +14,10 @@ use app\models\ContactForm;
 class SiteController extends Controller
 {
 
+    public function actionDashboard(){
+        return $this->render('dashboard');
+    }
+
     public function actionFactorial()
     {
         return $this->render('factorial');

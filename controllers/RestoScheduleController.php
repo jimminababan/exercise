@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\RestoSchedule;
 use app\models\search\RestoScheduleSearch;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,6 +15,57 @@ use yii\filters\VerbFilter;
  */
 class RestoScheduleController extends Controller
 {
+    public function actionH(){
+        $string = "Mon-Wed, Sun, Wed, Sat 5 pm - 12:30 am / Thu-Fri, Sun 5 pm - 1:30 am / Sat-Sun, Wed 3 pm - 1:30 am / Sun 3 pm - 11:30 pm";
+        // pecah schedule kata panjang
+        $pecahSched = explode(' / ',$string);
+
+        foreach ($pecahSched as $p){
+            // jika ada koma, pecah
+            if(strpos($p,',')){
+                $pecahKoma = explode(', ',$p);
+                $head = $pecahKoma[0];
+                $tail = array_slice($pecahKoma,1);
+                
+                    echo $head;
+                    echo '<br />';
+                    foreach ($tail as $t){
+                        // jika ada am
+                        if(strpos($t, 'am') || strpos($t,'pm')){
+                            $pecahAm = explode(' ',$t);
+                            $pahead = $pecahAm[0];
+                            $patail = array_slice($pecahAm,1);
+                            $patail =  implode(' ',$patail);
+
+                            echo $pahead;
+                            echo '<br />';
+                            echo $patail;
+                            echo '<br />';
+                        }
+                        else{
+                            echo $t;
+                            echo '<br />';
+                        }
+                    }
+                    echo "TAIL " . Json::encode($tail);
+
+                    echo '<br />';
+                    echo '------------';
+                echo '<br />';
+
+
+            }
+//            jika tidak ada koma
+            else{
+                echo "ALL " . Json::encode($p);
+                echo '<br />';
+            }
+        }
+        echo '<br />';
+        echo $string;
+
+    }
+
     /**
      * {@inheritdoc}
      */
