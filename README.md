@@ -8,4 +8,11 @@
 
 <p>If you have any questions, please email jimmi@nababan.org</p>
 
- 
+Features
+--------------------
+- [yii2-migrik](https://github.com/Insolita/yii2-migrik)
+
+Installation
+--------------------
+- Run command, composer install
+- Run command, php yii migrate/up, then yes
