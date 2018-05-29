@@ -9,6 +9,8 @@ use Yii;
  *
  * @property int $id
  * @property string $name
+ *
+ * @property RestaurantOpeningHours[] $restaurantOpeningHours
  */
 class Restaurants extends \yii\db\ActiveRecord
 {
@@ -40,5 +42,13 @@ class Restaurants extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRestaurantOpeningHours()
+    {
+        return $this->hasMany(RestaurantOpeningHours::className(), ['restaurant_id' => 'id']);
     }
 }
