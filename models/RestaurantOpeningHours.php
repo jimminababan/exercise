@@ -46,7 +46,7 @@ class RestaurantOpeningHours extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'restaurant_id' => Yii::t('app', 'Restaurant ID'),
-            'day_of_week' => Yii::t('app', 'Numeric representation of the day of the week. 0 (for Sunday) through 6 (for Saturday).'),
+            'day_of_week' => Yii::t('app', 'Day of Week'),
             'time_open' => Yii::t('app', 'Time Open'),
             'time_closed' => Yii::t('app', 'Time Closed'),
         ];
