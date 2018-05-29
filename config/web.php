@@ -59,6 +59,9 @@ $config = [
 
     ],
     'modules' => [
+        'restaurantopeninghours' => [
+            'class' => 'app\modules\restaurantopeninghours\RestaurantOpeningHours',
+        ],
         'restaurants' => [
             'class' => 'app\modules\restaurants\Restaurants',
         ],
