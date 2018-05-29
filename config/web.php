@@ -58,6 +58,11 @@ $config = [
         ],
 
     ],
+    'modules' => [
+        'restaurants' => [
+            'class' => 'app\modules\restaurants\Restaurants',
+        ],
+    ],
     'params' => $params,
 ];
 
