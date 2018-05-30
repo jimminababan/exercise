@@ -44,7 +44,7 @@ class RestaurantsSearch extends Restaurants
      */
     public function search($params)
     {
-        $query = Restaurants::find()->joinWith(['restaurantOpeningHours']);
+        $query = Restaurants::find()->with(['restaurantOpeningHours']);
 
         // add conditions that should always apply here
 
