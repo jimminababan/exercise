@@ -65,6 +65,9 @@ $config = [
         'restaurants' => [
             'class' => 'app\modules\restaurants\Restaurants',
         ],
+        'usernotifications' => [
+            'class' => 'app\modules\usernotifications\UserNotifications',
+        ],
     ],
     'params' => $params,
 ];
