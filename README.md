@@ -10,6 +10,7 @@
 
 Features
 --------------------
+- [pusher/pusher-http-php](https://github.com/pusher/pusher-http-php)
 - [symfony/var-dumper](https://github.com/symfony/var-dumper)
 - [yii2-migrik](https://github.com/Insolita/yii2-migrik)
 

@@ -67,6 +67,10 @@ class UserNotificationsController extends Controller
         $model = new UserNotifications();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $pusher = new \Pusher\Pusher(Yii::$app->params['pusher']['appKey'], Yii::$app->params['pusher']['appSecret'], Yii::$app->params['pusher']['appId']);
+            $pusher->trigger('user_notifications-to_user_id-'.$model->to_user_id, 'notifications_create', ['message' => $model->content]);
+            // \Yii::$app->pusher->trigger('user_notifications-to_user_id-'.$model->to_user_id, 'notifications_create', ['message' => $model->content]);
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -123,20 +127,5 @@ class UserNotificationsController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
-    }
-
-    public function actionCompose()
-    {
-        $model = new UserNotifications();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            \Yii::$app->pusher->trigger('user_notifications-to_user_id-'.$model->to_user_id, 'Notifications', $model->content);
-
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 }
