@@ -36,11 +36,13 @@ AppAsset::register($this);
         ],
     ]);
     echo Nav::widget([
+        'encodeLabels' => false,
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
+            Yii::$app->user->isGuest ? ['label' => 'Notifications'] : ['label' => 'Notifications <span class="badge">'.\app\models\UserNotifications::find()->where(['to_user_id' => Yii::$app->user->id, 'read' => 0])->count().'</span>', 'url' => ['/usernotifications/backend/user-notifications']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

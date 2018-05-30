@@ -48,4 +48,36 @@ class UserNotifications extends \yii\db\ActiveRecord
             'read' => Yii::t('app', 'Read'),
         ];
     }
+
+    public function getFromUserIdOptions()
+    {
+        return [
+            '1' => 'User 1',
+            '2' => 'User 2',
+            '3' => 'User 3',
+            '4' => 'User 4',
+            '5' => 'User 5',
+        ];
+    }
+
+    public function getReadOptions()
+    {
+        return [
+            '0' => Yii::t('app', 'Unread'),
+            '1' => Yii::t('app', 'Read'),
+        ];
+    }
+
+    public function getToUserIdOptions()
+    {
+        return [
+            '1' => 'User 1',
+            '2' => 'User 2',
+            '3' => 'User 3',
+            '4' => 'User 4',
+            '5' => 'User 5',
+            '100' => 'Admin',
+            '101' => 'Demo',
+        ];
+    }
 }

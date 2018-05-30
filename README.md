@@ -17,3 +17,6 @@ Installation
 --------------------
 - Run command, composer install
 - Run command, php yii migrate/up, then yes
+
+- http://localhost/exercise/restaurants/backend/restaurants
+- http://localhost/exercise/usernotifications/backend/user-notifications
