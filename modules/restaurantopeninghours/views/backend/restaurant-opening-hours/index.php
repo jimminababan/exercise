@@ -1,7 +1,9 @@
 <?php
 
-use yii\helpers\Html;
+use app\models\RestaurantOpeningHours;
+use kartik\select2\Select2;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\restaurantopeninghours\models\backend\RestaurantOpeningHoursSearch */
@@ -25,11 +27,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'restaurant_id',
-            'day_of_week',
-            'time_open',
-            'time_closed',
+            [
+                'attribute' => 'restaurant_name',
+                'value' => 'restaurant.name',
+            ],
+            [
+                'attribute' => 'day_of_week',
+                'filter' => Select2::widget([
+                    'attribute' => 'day_of_week',
+                    'data' => (new RestaurantOpeningHours)->getDayOfWeekOptions(),
+                    'model' => $searchModel,
+                    'options' => ['placeholder' => ''],
+                    'pluginOptions' => ['allowClear' => true],
+                ]),
+                'value' => 'dayOfWeekName',
+            ],
+            ['attribute' => 'time_open', 'value' => 'timeOpen'],
+            ['attribute' => 'time_closed', 'value' => 'timeClosed'],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

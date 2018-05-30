@@ -12,6 +12,8 @@ use app\models\RestaurantOpeningHours;
  */
 class RestaurantOpeningHoursSearch extends RestaurantOpeningHours
 {
+    public $restaurant_name;
+
     /**
      * {@inheritdoc}
      */
@@ -20,6 +22,7 @@ class RestaurantOpeningHoursSearch extends RestaurantOpeningHours
         return [
             [['id', 'restaurant_id', 'day_of_week'], 'integer'],
             [['time_open', 'time_closed'], 'safe'],
+            [['restaurant_name'], 'safe'],
         ];
     }
 
@@ -42,12 +45,15 @@ class RestaurantOpeningHoursSearch extends RestaurantOpeningHours
     public function search($params)
     {
         $query = RestaurantOpeningHours::find();
+        $query->joinWith(['restaurant']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['restaurant_name'] = ['asc' => ['restaurants.name' => SORT_ASC], 'desc' => ['restaurants.name' => SORT_DESC]];
 
         $this->load($params);
 
@@ -62,9 +68,12 @@ class RestaurantOpeningHoursSearch extends RestaurantOpeningHours
             'id' => $this->id,
             'restaurant_id' => $this->restaurant_id,
             'day_of_week' => $this->day_of_week,
-            'time_open' => $this->time_open,
-            'time_closed' => $this->time_closed,
         ]);
+
+        $query->andFilterWhere(['like', 'time_open', $this->time_open]);
+        $query->andFilterWhere(['like', 'time_closed', $this->time_closed]);
+
+        $query->andFilterWhere(['like', 'restaurants.name', $this->restaurant_name]);
 
         return $dataProvider;
     }

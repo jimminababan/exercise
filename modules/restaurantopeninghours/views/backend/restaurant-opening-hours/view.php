@@ -28,11 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'restaurant_id',
-            'day_of_week',
-            'time_open',
-            'time_closed',
+            ['attribute' => 'restaurant_name', 'value' => function($model) { return $model->getRestaurantName(); }],
+            ['attribute' => 'day_of_week', 'value' => 'dayOfWeekName'],
+            ['attribute' => 'time_open', 'value' => 'timeOpen'],
+            ['attribute' => 'time_closed', 'value' => 'timeClosed'],
         ],
     ]) ?>
 

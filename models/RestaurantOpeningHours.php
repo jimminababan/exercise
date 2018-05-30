@@ -59,4 +59,36 @@ class RestaurantOpeningHours extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Restaurants::className(), ['id' => 'restaurant_id']);
     }
+
+    public function getDayOfWeekName()
+    {
+        $options = $this->getDayOfWeekOptions();
+        return $options[$this->day_of_week];
+    }
+
+    public function getDayOfWeekOptions()
+    {
+        $options = [];
+
+        for ($i = 0; $i < 7; $i++) {
+            $options[$i] = jddayofweek($i, 1);
+        }
+
+        return $options;
+    }
+
+    public function getRestaurantName()
+    {
+        return $this->restaurant->name;
+    }
+
+    public function getTimeClosed()
+    {
+        return \Yii::$app->formatter->asTime($this->time_closed, 'php:H:i');
+    }
+
+    public function getTimeOpen()
+    {
+        return \Yii::$app->formatter->asTime($this->time_open, 'php:H:i');
+    }
 }

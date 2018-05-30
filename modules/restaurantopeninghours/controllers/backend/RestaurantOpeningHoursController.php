@@ -65,8 +65,14 @@ class RestaurantOpeningHoursController extends Controller
     public function actionCreate()
     {
         $model = new RestaurantOpeningHours();
+        $model->restaurant_id = Yii::$app->request->get('restaurant_id');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            if (\Yii::$app->request->get('restaurant_id')) {
+                return $this->redirect(['/restaurants/backend/restaurants/view', 'id' => $model->restaurant->id]);
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -87,6 +93,11 @@ class RestaurantOpeningHoursController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            if (\Yii::$app->request->get('restaurant_id')) {
+                return $this->redirect(['/restaurants/backend/restaurants/view', 'id' => $model->restaurant->id]);
+            }
+            
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -104,7 +115,12 @@ class RestaurantOpeningHoursController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->delete();
+
+        if (\Yii::$app->request->get('restaurant_id')) {
+            return $this->redirect(['/restaurants/backend/restaurants/view', 'id' => $model->restaurant->id]);
+        }
 
         return $this->redirect(['index']);
     }
