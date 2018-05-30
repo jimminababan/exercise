@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="restaurants-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?= $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a(Yii::t('app', 'Create Restaurants'), ['create'], ['class' => 'btn btn-success']) ?>
@@ -25,8 +25,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'name',
+            [
+                'format' => 'raw',
+                'header' => Yii::t('app', 'Opening Hours'),
+                'value' => function($model) {
+                    $html = '';
+
+                    foreach ($model->restaurantOpeningHours as $openingHour) {
+                        $html .= $openingHour->getDayOfWeekName().' '.$openingHour->getTimeOpen().' - '.$openingHour->getTimeClosed().'<br />';
+                    }
+
+                    return $html;
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

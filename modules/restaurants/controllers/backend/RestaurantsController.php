@@ -4,6 +4,7 @@ namespace app\modules\restaurants\controllers\backend;
 
 use Yii;
 use app\models\Restaurants;
+use app\modules\restaurantopeninghours\models\backend\RestaurantOpeningHoursSearch;
 use app\modules\restaurants\models\backend\RestaurantsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -52,8 +53,18 @@ class RestaurantsController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
+        $searchModel2 = new RestaurantOpeningHoursSearch();
+        $searchParams = Yii::$app->request->queryParams;
+        $searchParams['RestaurantOpeningHoursSearch']['restaurant_id'] = $model->id;
+        $dataProvider2 = $searchModel2->search($searchParams);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+
+            'searchModel2' => $searchModel2,
+            'dataProvider2' => $dataProvider2,
         ]);
     }
 
