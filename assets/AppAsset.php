@@ -21,6 +21,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/growl-custom.css',
     ];
     public $js = [
         'https://js.pusher.com/4.2/pusher.min.js',
@@ -29,5 +30,6 @@ class AppAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'kartik\growl\GrowlAsset',
     ];
 }

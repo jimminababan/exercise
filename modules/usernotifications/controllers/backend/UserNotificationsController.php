@@ -69,7 +69,6 @@ class UserNotificationsController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $pusher = new \Pusher\Pusher(Yii::$app->params['pusher']['appKey'], Yii::$app->params['pusher']['appSecret'], Yii::$app->params['pusher']['appId']);
             $pusher->trigger('user_notifications-to_user_id-'.$model->to_user_id, 'notifications_create', ['message' => $model->content]);
-            // \Yii::$app->pusher->trigger('user_notifications-to_user_id-'.$model->to_user_id, 'notifications_create', ['message' => $model->content]);
 
             return $this->redirect(['view', 'id' => $model->id]);
         }
