@@ -5,6 +5,7 @@
 
 use app\widgets\Alert;
 use yii\helpers\Html;
+use yii\widgets\Pjax;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -19,6 +20,8 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="pusher_key" content="<?= Yii::$app->params['pusher']['appKey'] ?>" />
+    <meta name="user_id" content="<?= Yii::$app->user->isGuest ? '' : Yii::$app->user->id ?>" />
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -28,6 +31,7 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
+    Pjax::begin(['id' => 'menu-pjax']);
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
@@ -36,11 +40,13 @@ AppAsset::register($this);
         ],
     ]);
     echo Nav::widget([
+        'encodeLabels' => false,
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
+            Yii::$app->user->isGuest ? ['label' => 'Notifications'] : ['label' => 'Notifications <span class="badge">'.\app\models\UserNotifications::find()->where(['to_user_id' => Yii::$app->user->id, 'read' => 0])->count().'</span>', 'url' => ['/usernotifications/backend/user-notifications']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -56,6 +62,7 @@ AppAsset::register($this);
         ],
     ]);
     NavBar::end();
+    Pjax::end();
     ?>
 
     <div class="container">

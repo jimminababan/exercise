@@ -8,4 +8,16 @@
 
 <p>If you have any questions, please email jimmi@nababan.org</p>
 
- 
+Features
+--------------------
+- [pusher/pusher-http-php](https://github.com/pusher/pusher-http-php)
+- [symfony/var-dumper](https://github.com/symfony/var-dumper)
+- [yii2-migrik](https://github.com/Insolita/yii2-migrik)
+
+Installation
+--------------------
+- Run command, composer install
+- Run command, php yii migrate/up, then yes
+
+- http://localhost/exercise/restaurants/backend/restaurants
+- http://localhost/exercise/usernotifications/backend/user-notifications

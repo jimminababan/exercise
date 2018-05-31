@@ -1,0 +1,4 @@
+Import this csv file into a database. Build a simple webapp that allows the user to filter for restaurants open at the input time.
+Ideally, you have a function that takes in the date time the user inputs and returns a list of restaurants open at that time.
+On top of that, users can save restaurants into their own named collections (eg. Vegetarian favourites, Meat-lovers etc.).
+Users can also invite their friends to collaborate (add, remove, edit name) on the collections via email, and they can see updates to their collections in real-time, without page refreshes.

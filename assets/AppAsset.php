@@ -23,6 +23,8 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        'https://js.pusher.com/4.2/pusher.min.js',
+        'js/pusher.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

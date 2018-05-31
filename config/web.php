@@ -58,6 +58,17 @@ $config = [
         ],
 
     ],
+    'modules' => [
+        'restaurantopeninghours' => [
+            'class' => 'app\modules\restaurantopeninghours\RestaurantOpeningHours',
+        ],
+        'restaurants' => [
+            'class' => 'app\modules\restaurants\Restaurants',
+        ],
+        'usernotifications' => [
+            'class' => 'app\modules\usernotifications\UserNotifications',
+        ],
+    ],
     'params' => $params,
 ];
 
