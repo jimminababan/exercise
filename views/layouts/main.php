@@ -31,7 +31,6 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
-    Pjax::begin(['id' => 'menu-pjax']);
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
@@ -46,7 +45,7 @@ AppAsset::register($this);
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? ['label' => 'Notifications'] : ['label' => 'Notifications <span class="badge">'.\app\models\UserNotifications::find()->where(['to_user_id' => Yii::$app->user->id, 'read' => 0])->count().'</span>', 'url' => ['/usernotifications/backend/user-notifications']],
+            Yii::$app->user->isGuest ? ['label' => 'Notifications'] : ['label' => 'Notifications', 'url' => ['/usernotifications/backend/user-notifications']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -62,13 +61,22 @@ AppAsset::register($this);
         ],
     ]);
     NavBar::end();
-    Pjax::end();
     ?>
 
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
+
+        <?php Pjax::begin(['id' => 'user-notifications-pjax']) ?>
+            <label>
+                Notifications
+                <span class="badge">
+                    <?= \app\models\UserNotifications::find()->where(['to_user_id' => Yii::$app->user->id, 'read' => 0])->count() ?>
+                </span>
+            </label>
+        <?php Pjax::end() ?>
+
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>

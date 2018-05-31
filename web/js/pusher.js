@@ -6,5 +6,5 @@ var channel = pusher.subscribe('user_notifications-to_user_id-'+user_id);
 
 channel.bind('notifications_create', function(data) {
     console.log(data);
-    $.pjax.reload({ container: '#menu-pjax', timeout: false });
+    $.pjax.reload({ container: '#user-notifications-pjax', timeout: false });
 });
